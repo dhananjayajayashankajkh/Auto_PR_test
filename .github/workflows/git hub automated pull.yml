@@ -13,7 +13,14 @@ jobs:
           fetch-depth: 0  # Ensures full history is available
 
       - name: Make changes to pull request
-        run: date +%s > report.txt
+        run: echo "Updated on $(date +%s)" > report.txt  # Ensures the file is updated with a unique timestamp
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add report.txt
+          git commit -m "Update report with timestamp"
 
       - name: Create Pull Request
         id: cpr
@@ -24,7 +31,8 @@ jobs:
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: release
+          base: development  # Target branch for PR
+          branch: release  # New branch created for PR
           delete-branch: false
           title: '[Example] Update report'
           body: |
@@ -43,5 +51,5 @@ jobs:
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.GITHUBPAT }}
-          pull-request-number: ${{ needs.createPullRequest.outputs.pull-request-number }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
