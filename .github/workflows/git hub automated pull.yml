@@ -39,10 +39,6 @@ jobs:
           assignees: peter-evans
           draft: false  # Creates the PR as a regular PR, not a draft
 
-  automerge:
-    runs-on: ubuntu-latest
-    needs: createPullRequest
-    steps:
       - name: Enable auto-merge
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
