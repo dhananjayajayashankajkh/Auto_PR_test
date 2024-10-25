@@ -39,7 +39,6 @@ jobs:
   automerge:
     runs-on: ubuntu-latest
     needs: createPullRequest  # This ensures automerge runs after createPullRequest
-    if: github.actor == 'dependabot[bot]'  # Conditional to check if dependabot is the actor
     steps:
       - uses: peter-evans/enable-pull-request-automerge@v3
         with:
