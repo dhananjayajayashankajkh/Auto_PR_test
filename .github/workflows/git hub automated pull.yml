@@ -39,9 +39,9 @@ jobs:
           assignees: peter-evans
           draft: false  # Creates the PR as a regular PR, not a draft
 
-      # - name: Enable auto-merge
-      #   uses: peter-evans/enable-pull-request-automerge@v3
-      #   with:
-      #     token: ${{ secrets.GITHUBPAT }}
-      #     pull-request-number: ${{ needs.createPullRequest.outputs.pull-request-number }}
-      #     merge-method: squash
+      - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUBPAT }}
+          pull-request-number: ${{ needs.createPullRequest.outputs.pull-request-number }}
+          merge-method: squash
