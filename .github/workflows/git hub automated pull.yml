@@ -34,7 +34,7 @@ jobs:
             report
             automated pr
           assignees: peter-evans
-          reviewers: peter-evans
+          # reviewers: peter-evans
           # team-reviewers: |
           #   developers
           #   qa-team
