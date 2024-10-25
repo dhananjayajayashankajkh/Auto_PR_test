@@ -39,3 +39,9 @@ jobs:
           #   developers
           #   qa-team
           # draft: false
+
+      - name: Enable auto-merge
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUBPAT }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
